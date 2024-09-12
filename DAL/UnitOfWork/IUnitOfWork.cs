@@ -1,4 +1,4 @@
-﻿namespace Utilities.UnitOfWork
+﻿namespace DAL.UnitOfWork
 {
     public interface IUnitOfWork
     {

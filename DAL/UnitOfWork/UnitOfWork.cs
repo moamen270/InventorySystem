@@ -1,6 +1,6 @@
 ﻿using DAL.Data;
 
-namespace Utilities.UnitOfWork
+namespace DAL.UnitOfWork
 {
     public class UnitOfWork : IDisposable, IUnitOfWork
     {

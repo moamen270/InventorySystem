@@ -1,8 +1,8 @@
 using DAL.Data;
 using DAL.Repositories;
 using DAL.Repositories.Interfaces;
+using DAL.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
-using Utilities.UnitOfWork;
 
 var builder = WebApplication.CreateBuilder(args);
 
