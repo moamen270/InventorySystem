@@ -1,12 +1,6 @@
 ﻿using DAL.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Utilities.Interfaces;
 
-namespace Utilities.Services
+namespace Utilities.UnitOfWork
 {
     public class UnitOfWork : IDisposable, IUnitOfWork
     {

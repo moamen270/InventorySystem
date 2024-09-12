@@ -2,9 +2,7 @@ using DAL.Data;
 using DAL.Repositories;
 using DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-
-using Utilities.Interfaces;
-using Utilities.Services;
+using Utilities.UnitOfWork;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +17,7 @@ builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
 builder.Services.AddScoped<IStockHistoryRepository, StockHistoryRepository>();
 builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
 
-// Dependency Injection for Services
+// Dependency Injection for Unit of Work
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // Add services to the container.
