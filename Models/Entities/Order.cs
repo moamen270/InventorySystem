@@ -4,10 +4,10 @@ namespace Models.Entities
 {
     public class Order
     {
-        public int OrderId { get; set; }
-        public DateTime OrderDate { get; set; }
+        public int Id { get; set; }
+        public DateTime CreationDate { get; set; }
         public Status Status { get; set; }
-        public decimal TotalAmount { get; set; }
+        public double TotalAmount { get; set; }
 
         // Foreign key to Customer
         public int CustomerId { get; set; }
