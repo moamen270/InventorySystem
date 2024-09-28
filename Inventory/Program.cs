@@ -22,7 +22,8 @@ builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
 // Dependency Injection for Unit of Work
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-builder.Services.AddScoped<IProductService,ProductService>();
+// Dependency Injection for Services
+builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ISupplierService, SupplierService>();
 
 // Add services to the container.
@@ -51,11 +52,7 @@ app.MapControllerRoute(
 
 app.Run();
 
-
-
-
-
-// DI Life Cycle 
-// Transent -> Object for each call 
-// Scoped -> Object for each request 
-// Singleton -> ONLY One(One for ALL) Same object to all request 
+// DI Life Cycle
+// Transent -> Object for each call
+// Scoped -> Object for each request
+// Singleton -> ONLY One(One for ALL) Same object to all request
