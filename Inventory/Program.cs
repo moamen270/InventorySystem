@@ -1,3 +1,5 @@
+using BL.Service;
+using BL.Service.Interfaces;
 using DAL.Data;
 using DAL.Repositories;
 using DAL.Repositories.Interfaces;
@@ -19,6 +21,9 @@ builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
 
 // Dependency Injection for Unit of Work
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddScoped<IProductService,ProductService>();
+builder.Services.AddScoped<ISupplierService, SupplierService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -45,3 +50,12 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+
+
+
+
+// DI Life Cycle 
+// Transent -> Object for each call 
+// Scoped -> Object for each request 
+// Singleton -> ONLY One(One for ALL) Same object to all request 

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Models.Entities.Supplier>
+
+<h2>Supplier List</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Supplier Name</th>
+            <th>Contact Email</th>
+            <th>Contact Phone</th>
+            <th>Address</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var supplier in Model)
+        {
+            <tr>
+                <td>@supplier.SupplierName</td>
+                <td>@supplier.ContactEmail</td>
+                <td>@supplier.ContactPhone</td>
+                <td>@supplier.Address</td>
+                <td>
+                    <a asp-controller="Supplier" asp-action="Details" asp-route-id="@supplier.SupplierId" class="btn btn-sm btn-info">Details</a>
+                    <a asp-controller="Supplier" asp-action="Edit" asp-route-id="@supplier.SupplierId" class="btn btn-sm btn-primary">Edit</a>
+                    <a asp-controller="Supplier" asp-action="Delete" asp-route-id="@supplier.SupplierId" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="@Url.Action("Create", "Supplier")" class="btn btn-primary">Create New Supplier</a>

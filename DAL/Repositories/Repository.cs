@@ -1,44 +1,51 @@
 ﻿using DAL.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace DAL.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        protected readonly ApplicationDbContext _context;
+        private readonly DbContext _context;
+        private readonly DbSet<T> _dbSet;
 
-        public Repository(ApplicationDbContext context)
+        public Repository(DbContext context)
         {
             _context = context;
+            _dbSet = _context.Set<T>();
         }
 
-        public async Task<T> AddAsync(T entity)
+        public async Task<T?> GetByIdAsync(int id)
         {
-            await _context.Set<T>().AddAsync(entity);
-            return entity;
+            return await _dbSet.FindAsync(id);
         }
 
-        public T Delete(int id)
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            var entity = _context.Set<T>().Find(id);
-            _context.Set<T>().Remove(entity);
-            return entity;
+            return await _dbSet.ToListAsync();
         }
 
-        public IQueryable<T> GetAll()
+        public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate)
         {
-            return _context.Set<T>().AsQueryable();
+            return await _dbSet.Where(predicate).ToListAsync();
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public async Task AddAsync(T entity)
         {
-            return await _context.Set<T>().FindAsync(id);
+            await _dbSet.AddAsync(entity);
+            await _context.SaveChangesAsync();
         }
 
-        public T Update(T entity)
+        public async Task UpdateAsync(T entity)
         {
-            _context.Set<T>().Update(entity);
-            return entity;
+            _dbSet.Update(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(T entity)
+        {
+            _dbSet.Remove(entity);
+            await _context.SaveChangesAsync();
         }
     }
 }

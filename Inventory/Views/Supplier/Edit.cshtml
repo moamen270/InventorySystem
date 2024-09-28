@@ -1,0 +1,33 @@
+﻿@model Models.Entities.Supplier
+
+<h2>Edit Supplier</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="SupplierId" />
+
+    <div class="form-group">
+        <label for="SupplierName">Supplier Name</label>
+        <input asp-for="SupplierName" class="form-control" />
+        <span asp-validation-for="SupplierName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="ContactEmail">Contact Email</label>
+        <input asp-for="ContactEmail" class="form-control" />
+        <span asp-validation-for="ContactEmail" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="ContactPhone">Contact Phone</label>
+        <input asp-for="ContactPhone" class="form-control" />
+        <span asp-validation-for="ContactPhone" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="Address">Address</label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>

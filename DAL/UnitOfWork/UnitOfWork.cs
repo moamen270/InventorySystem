@@ -16,11 +16,6 @@ namespace DAL.UnitOfWork
             await _context.SaveChangesAsync();
         }
 
-        public void Save()
-        {
-            _context.SaveChanges();
-        }
-
         public void Dispose()
         {
             _context.Dispose();

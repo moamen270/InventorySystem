@@ -1,15 +1,14 @@
-﻿namespace DAL.Repositories.Interfaces
+﻿using System.Linq.Expressions;
+
+namespace DAL.Repositories.Interfaces
 {
     public interface IRepository<T> where T : class
     {
-        IQueryable<T> GetAll();
-
-        Task<T> GetByIdAsync(int id);
-
-        Task<T> AddAsync(T entity);
-
-        T Update(T entity);
-
-        T Delete(int id);
+        Task<T?> GetByIdAsync(int id);
+        Task<IEnumerable<T>> GetAllAsync();
+        Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate);
+        Task AddAsync(T entity);
+        Task UpdateAsync(T entity);
+        Task DeleteAsync(T entity);
     }
 }
