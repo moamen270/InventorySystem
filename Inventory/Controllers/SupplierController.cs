@@ -24,7 +24,7 @@ namespace Inventory.Controllers
             var supplier = await _supplierService.GetSupplierByIdAsync(id);
             if (supplier == null) return NotFound();
 
-            *//*var products = await _productService.GetProductsBySupplierIdAsync(id);
+            *//*var products = await _productService.GetProductsByIdAsync(id);
             ViewBag.Products = products;  *//*
 
             return View(supplier);
@@ -69,7 +69,7 @@ namespace Inventory.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, Supplier supplier)
         {
-            if (id != supplier.SupplierId) return NotFound();
+            if (id != supplier.Id) return NotFound();
 
             if (ModelState.IsValid)
             {

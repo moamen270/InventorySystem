@@ -10,7 +10,6 @@ namespace Inventory.Controllers
         private readonly IProductService _productService;
         private readonly ISupplierService _supplierService;
 
-
         public ProductController(IProductService productService, ISupplierService supplierService)
         {
             _productService = productService;
@@ -21,10 +20,11 @@ namespace Inventory.Controllers
         public async Task<IActionResult> Index()
         {
             var products = await _productService.GetAllProductsAsync();
-            ViewBag.Suppliers = new SelectList(await _supplierService.GetAllSuppliersAsync(), "SupplierId", "SupplierName");
+            ViewBag.Suppliers = new SelectList(await _supplierService.GetAllSuppliersAsync(), "Id", "Name");
 
             return View(products);
         }
+
         [HttpGet("Details")]
         public async Task<IActionResult> Details(int id)
         {
@@ -35,13 +35,13 @@ namespace Inventory.Controllers
             }
             return View(product);
         }
+
         [HttpGet("Create")]
         public async Task<IActionResult> Create()
         {
-            ViewBag.Suppliers = new SelectList(await _supplierService.GetAllSuppliersAsync(), "SupplierId", "SupplierName");
+            ViewBag.Suppliers = new SelectList(await _supplierService.GetAllSuppliersAsync(), "Id", "Name");
             return View();
         }
-
 
         [HttpPost("Create")]
         public async Task<IActionResult> Create(Product product)
@@ -54,6 +54,7 @@ namespace Inventory.Controllers
             }
             return View(product);
         }
+
         [HttpGet("Edit")]
         public async Task<IActionResult> Edit(int id)
         {
@@ -62,7 +63,7 @@ namespace Inventory.Controllers
             {
                 return NotFound();
             }
-            ViewBag.Suppliers = new SelectList(await _supplierService.GetAllSuppliersAsync(), "SupplierId", "SupplierName", product.SupplierId);
+            ViewBag.Suppliers = new SelectList(await _supplierService.GetAllSuppliersAsync(), "Id", "Name", product.Id);
 
             return View(product);
         }
@@ -70,7 +71,7 @@ namespace Inventory.Controllers
         [HttpPost("Edit")]
         public async Task<IActionResult> Edit(int id, Product product)
         {
-            if (id != product.ProductId)
+            if (id != product.Id)
             {
                 return BadRequest();
             }
@@ -82,6 +83,7 @@ namespace Inventory.Controllers
             }
             return View(product);
         }
+
         [HttpGet("Delete")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -92,12 +94,12 @@ namespace Inventory.Controllers
             }
             return View(product);
         }
+
         [HttpPost]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             await _productService.DeleteProductAsync(id);
             return RedirectToAction(nameof(Index));
         }
-
     }
 }

@@ -13,13 +13,11 @@ namespace DAL.Repositories
             _context = context;
         }
 
-
-
         public async Task<Supplier> GetSupplierWithProductsByIdAsync(int id)
         {
             return await _context.Suppliers
                 .Include(s => s.Products) // Include related products
-                .FirstOrDefaultAsync(s => s.SupplierId == id);
+                .FirstOrDefaultAsync(s => s.Id == id);
         }
     }
 }
