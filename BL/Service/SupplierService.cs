@@ -1,5 +1,6 @@
 ﻿using BL.Service.Interfaces;
 using DAL.Repositories.Interfaces;
+using DAL.UnitOfWork;
 using Models.Entities;
 
 namespace BL.Service
@@ -7,10 +8,12 @@ namespace BL.Service
     public class SupplierService : ISupplierService
     {
         private readonly ISupplierRepository _supplierRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public SupplierService(ISupplierRepository supplierRepository)
+        public SupplierService(ISupplierRepository supplierRepository, IUnitOfWork unitOfWork)
         {
             _supplierRepository = supplierRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<IEnumerable<Supplier>> GetAllSuppliersAsync()
@@ -26,20 +29,22 @@ namespace BL.Service
         public async Task AddSupplierAsync(Supplier supplier)
         {
             await _supplierRepository.AddAsync(supplier);
+            await _unitOfWork.SaveAsync();
         }
 
         public async Task UpdateSupplierAsync(Supplier supplier)
         {
-            await _supplierRepository.UpdateAsync(supplier);
+            _supplierRepository.Update(supplier);
+            await _unitOfWork.SaveAsync();
         }
 
         public async Task DeleteSupplierAsync(int id)
         {
             var supplier = await _supplierRepository.GetByIdAsync(id);
-            if (supplier != null)
-            {
-                await _supplierRepository.DeleteAsync(supplier);
-            }
+            if (supplier is null)
+                return;
+            _supplierRepository.Delete(supplier);
+            await _unitOfWork.SaveAsync();
         }
 
         public async Task<Supplier> GetSupplierWithProductsByIdAsync(int id)
