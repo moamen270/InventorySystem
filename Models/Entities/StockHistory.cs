@@ -2,7 +2,7 @@
 {
     public class StockHistory
     {
-        public int StockHistoryId { get; set; }
+        public int Id { get; set; }
         public int QuantityChange { get; set; }
         public DateTime ChangeDate { get; set; }
         public string Reason { get; set; }
