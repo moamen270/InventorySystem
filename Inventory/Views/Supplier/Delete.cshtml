@@ -7,11 +7,11 @@
 
     <div>
         <label>Supplier Name:</label>
-        <span>@Model.SupplierName</span>
+        <span>@Model.Name</span>
     </div>
 
     <form asp-action="DeleteSupplier" method="post">
-        <input type="hidden" asp-for="SupplierId" />
+        <input type="hidden" asp-for="Id" />
         <button type="submit" class="btn btn-danger">Delete</button>
         <a asp-action="Index" class="btn btn-secondary">Cancel</a>
     </form>
@@ -25,5 +25,5 @@
 
 
 
-@* <input type="hidden" name="id" value="@Model.SupplierId" />
+@* <input type="hidden" name="id" value="@Model.Id" />
  *@

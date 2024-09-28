@@ -4,9 +4,9 @@
 
 <form asp-action="Create" method="post">
     <div class="form-group">
-        <label for="ProductName">Product Name</label>
-        <input asp-for="ProductName" class="form-control" />
-        <span asp-validation-for="ProductName" class="text-danger"></span>
+        <label for="Name">Product Name</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
     <div class="form-group">
@@ -34,11 +34,11 @@
     </div>
 
     <div class="form-group">
-        <label for="SupplierId">Supplier</label>
+        <label for="Id">Supplier</label>
         <select asp-for="SupplierId" class="form-control" asp-items="ViewBag.Suppliers">
             <option value="">Select Supplier</option>
         </select>
-        <span asp-validation-for="SupplierId" class="text-danger"></span>
+        <span asp-validation-for="Id" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-primary">Create</button>

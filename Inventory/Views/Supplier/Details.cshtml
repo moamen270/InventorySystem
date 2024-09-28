@@ -7,17 +7,17 @@
 
     <div>
         <label>Supplier Name:</label>
-        <span>@Model.SupplierName</span>
+        <span>@Model.Name</span>
     </div>
 
     <div>
         <label>Contact Email:</label>
-        <span>@Model.ContactEmail</span>
+        <span>@Model.Email</span>
     </div>
 
     <div>
         <label>Contact Phone:</label>
-        <span>@Model.ContactPhone</span>
+        <span>@Model.Phone</span>
     </div>
 
     <div>
@@ -43,7 +43,7 @@
             @foreach (var product in Model.Products)
             {
                 <tr>
-                    <td>@product.ProductName</td>
+                    <td>@product.Name</td>
                     <td>@product.Description</td>
                     <td>@product.Price</td>
                     <td>@product.Quantity</td>
