@@ -39,6 +39,7 @@ namespace DAL.Data
                 .WithOne(u => u.Role)
                 .HasForeignKey(ur => ur.RoleId)
                 .IsRequired();
+
         }
         // DbSets for each entity in the system
         public DbSet<Product> Products { get; set; }

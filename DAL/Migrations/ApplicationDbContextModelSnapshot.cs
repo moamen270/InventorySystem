@@ -138,7 +138,7 @@ namespace DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("Models.Entities.Order", b =>
@@ -165,7 +165,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("Models.Entities.OrderItem", b =>
@@ -194,7 +194,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItems", (string)null);
                 });
 
             modelBuilder.Entity("Models.Entities.Product", b =>
@@ -227,7 +227,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("Models.Entities.Role", b =>
@@ -284,7 +284,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("StockHistories");
+                    b.ToTable("StockHistories", (string)null);
                 });
 
             modelBuilder.Entity("Models.Entities.Supplier", b =>
@@ -309,7 +309,7 @@ namespace DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Suppliers");
+                    b.ToTable("Suppliers", (string)null);
                 });
 
             modelBuilder.Entity("Models.Entities.User", b =>
