@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<Models.Entities.Product>
-
+<div class="container">
 <h2>Product List</h2>
 <a href="@Url.Action("Create", "Product")" class="btn btn-primary">Create New Product</a>
 
@@ -24,7 +24,7 @@
                 <td>@product.Price</td>
                 <td>@product.Quantity</td>
                 <td>@product.ReorderLevel</td>
-                <td>@product.Supplier?.Name</td>
+                <td>@product.Supplier.Name</td>
                 <td>
                     <a href="@Url.Action("Edit", "Product", new { id = product.Id })" class="btn btn-sm btn-primary">Edit</a>
                     <a href="@Url.Action("Delete", "Product", new { id = product.Id })" class="btn btn-sm btn-danger">Delete</a>
@@ -34,3 +34,4 @@
     </tbody>
 </table>
 
+</div>

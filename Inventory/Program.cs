@@ -4,6 +4,7 @@ using DAL.Data;
 using DAL.Repositories;
 using DAL.Repositories.Interfaces;
 using DAL.UnitOfWork;
+using Inventory.Extentions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,8 +29,16 @@ builder.Services.AddScoped<ISupplierService, SupplierService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddIdentityService();
 
 var app = builder.Build();
+
+// Seed roles and admin user
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    await ApplicationDbInitializer.SeedRolesAndAdminAsync(services);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -48,7 +57,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Account}/{action=Login}");
 
 app.Run();
 

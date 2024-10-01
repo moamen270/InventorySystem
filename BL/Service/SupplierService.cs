@@ -34,7 +34,7 @@ namespace BL.Service
 
         public async Task UpdateSupplierAsync(Supplier supplier)
         {
-            _supplierRepository.Update(supplier);
+             _supplierRepository.Update(supplier);
             await _unitOfWork.SaveAsync();
         }
 
@@ -43,7 +43,7 @@ namespace BL.Service
             var supplier = await _supplierRepository.GetByIdAsync(id);
             if (supplier is null)
                 return;
-            _supplierRepository.Delete(supplier);
+             _supplierRepository.Delete(supplier);
             await _unitOfWork.SaveAsync();
         }
 
