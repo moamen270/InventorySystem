@@ -76,6 +76,9 @@ namespace Inventory.Controllers
 
         public async Task<IActionResult> Logout()
         {
+            var user = await _userManager.GetUserAsync(User);
+
+            
             await _signInManager.SignOutAsync();
             return RedirectToAction(nameof(Login));
         }

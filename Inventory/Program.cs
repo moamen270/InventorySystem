@@ -20,6 +20,8 @@ builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
 builder.Services.AddScoped<IStockHistoryRepository, StockHistoryRepository>();
 builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
 
+builder.Services.AddIdentityService();
+
 // Dependency Injection for Unit of Work
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -29,7 +31,8 @@ builder.Services.AddScoped<ISupplierService, SupplierService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddIdentityService();
+
+
 
 var app = builder.Build();
 

@@ -499,10 +499,10 @@
                         <!-- User Account -->
                         <li class="dropdown user-menu">
                             <button class="dropdown-toggle nav-link" data-toggle="dropdown">
-                                <img src="images/user/user-xs-01.jpg" class="user-image rounded-circle" alt="User Image" />
-                                <span class="d-none d-lg-inline-block">John Doe</span>
-@*                                 <span class="d-none d-lg-inline-block">@UserManager.GetUserAsync(User).Result?.FirstName</span>
- *@                            </button>
+                                <img src="@UserManager.GetUserAsync(User).Result?.ImageUrl" class="user-image rounded-circle" alt="User Image" />
+@*                                 <span class="d-none d-lg-inline-block">John Doe</span>
+ *@                                <span class="d-none d-lg-inline-block">@UserManager.GetUserAsync(User).Result?.FirstName</span>
+                            </button>
                             <ul class="dropdown-menu dropdown-menu-right">
                                 <li>
                                     <a class="dropdown-link-item" href="user-profile.html">
