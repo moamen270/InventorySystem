@@ -4,6 +4,7 @@ using DAL.Data;
 using DAL.Repositories;
 using DAL.Repositories.Interfaces;
 using DAL.UnitOfWork;
+using Inventory.Extentions;
 using Microsoft.EntityFrameworkCore;
 using Utilities.Setting;
 
@@ -19,6 +20,8 @@ builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
 builder.Services.AddScoped<IStockHistoryRepository, StockHistoryRepository>();
 builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
+
+builder.Services.AddIdentityService();
 
 // Dependency Injection for Unit of Work
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -37,9 +40,18 @@ builder.Services.Configure<StripeSetting>(builder.Configuration.GetSection("Stri
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+
+
 var app = builder.Build();
 Stripe.StripeConfiguration.ApiKey =
     builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
+
+// Seed roles and admin user
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    await ApplicationDbInitializer.SeedRolesAndAdminAsync(services);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -53,12 +65,12 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Account}/{action=Login}");
 
 app.Run();
 

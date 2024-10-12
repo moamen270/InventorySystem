@@ -12,10 +12,10 @@ namespace Models.Entities
         public string ShippingAddress { get; set; }
         public Gender Gender { get; set; }
 
-        // Authentication fields
+/*        // Authentication fields
         public string Username { get; set; }
 
-        public string Password { get; set; }
+        public string Password { get; set; }*/
 
         // Navigation property for Orders
         public ICollection<Order> Orders { get; set; }
