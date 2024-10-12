@@ -14,21 +14,14 @@ namespace Inventory.Controllers
             _supplierService = supplierService;
             _productService = productService;
         }
+
         public async Task<IActionResult> Index()
         {
-            var suppliers = await _supplierService.GetAllSuppliersAsync();
+            var suppliers = _supplierService.GetAllSuppliersAsync();
+            var products = _productService.GetAllProductsAsync();
+
             return View(suppliers);
         }
-/*        public async Task<IActionResult> Details(int id)
-        {
-            var supplier = await _supplierService.GetSupplierByIdAsync(id);
-            if (supplier == null) return NotFound();
-
-            *//*var products = await _productService.GetProductsByIdAsync(id);
-            ViewBag.Products = products;  *//*
-
-            return View(supplier);
-        }*/
 
         public async Task<IActionResult> Details(int id)
         {
@@ -40,8 +33,6 @@ namespace Inventory.Controllers
 
             return View(supplier);
         }
-
-
 
         public IActionResult Create()
         {
@@ -66,7 +57,7 @@ namespace Inventory.Controllers
             return View(supplier);
         }
 
-        [HttpPost]
+        [HttpPut]
         public async Task<IActionResult> Edit(int id, Supplier supplier)
         {
             if (id != supplier.Id) return NotFound();
@@ -86,7 +77,7 @@ namespace Inventory.Controllers
             return View(supplier);
         }
 
-        [HttpPost]
+        [HttpDelete]
         public async Task<IActionResult> DeleteSupplier(int id)
         {
             await _supplierService.DeleteSupplierAsync(id);

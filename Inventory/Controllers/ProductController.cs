@@ -68,7 +68,7 @@ namespace Inventory.Controllers
             return View(product);
         }
 
-        [HttpPost("Edit")]
+        [HttpPut("Edit")]
         public async Task<IActionResult> Edit(int id, Product product)
         {
             if (id != product.Id)
@@ -95,7 +95,7 @@ namespace Inventory.Controllers
             return View(product);
         }
 
-        [HttpPost]
+        [HttpDelete]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             await _productService.DeleteProductAsync(id);

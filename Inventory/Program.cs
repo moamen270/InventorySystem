@@ -5,6 +5,7 @@ using DAL.Repositories;
 using DAL.Repositories.Interfaces;
 using DAL.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
+using Utilities.Setting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,13 +24,22 @@ builder.Services.AddScoped<ISupplierRepository, SupplierRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // Dependency Injection for Services
-builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ISupplierService, SupplierService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IOrderItemService, OrderItemService>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<ICheckoutService, CheckoutService>();
+
+// Stripe Payment
+builder.Services.Configure<StripeSetting>(builder.Configuration.GetSection("Stripe"));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+Stripe.StripeConfiguration.ApiKey =
+    builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
